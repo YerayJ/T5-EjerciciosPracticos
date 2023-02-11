@@ -20,7 +20,7 @@ public class Funciones {
 
     char[] tableroSinRespuesta() {
         // Creación de tabla para darle valor
-         char tablero[] = new char[TAMTABLERO];
+        char tablero[] = new char[TAMTABLERO];
         // Genera interrogaciones en todas las posiciones del tablero
         for (int i = 0; i < TAMTABLERO; i++) {
             tablero[i] = '?';
@@ -52,6 +52,7 @@ public class Funciones {
             }
         } // Fin de bucle
 
+        tablero[1] = 'x';
         return tablero;
     }
 
@@ -64,26 +65,52 @@ public class Funciones {
 
         // Introduce las pistas en el tablero
         for (int i = 0; i < tablero.length; i++) {
+
             // Comprueba que en la posición no haya una mina
             if (tablero[i] != 'x') {
-                // Si en la primera posición del array o la última no hay x le dará directamente el valor 0
-                if (i == 0 || i == tablero.length-1) {
-                    tablero[i] = '0';
-                }
-                // Si tiene una mina por delante y por detrás la pista será 2
-                else if (tablero[i - 1] == 'x' && tablero[i + 1] == 'x') {
-                    tablero[i] = '2';
-                    // Si tiene una mina por delante o por detrás la pista será 1
-                } else if (tablero[i - 1] == 'x' || tablero[i + 1] == 'x') {
-                    tablero[i] = '1';
-                    // Sino será 0
+
+                if (i == 0 || i == tablero.length - 1) {
+                    if ((i == 0 && tablero[i + 1] == 'x') || (i == tablero.length-1 && tablero[i - 1] == 'x')) {
+                        tablero[i] = '1';
+                    } else {
+                        tablero[i] = '0';
+                    }
                 } else {
-                    tablero[i] = '0';
+                    // Si tiene una mina por delante y por detrás la pista será 2
+                    if (tablero[i - 1] == 'x' && tablero[i + 1] == 'x') {
+                        tablero[i] = '2';
+                        // Si tiene una mina por delante o por detrás la pista será 1
+                    } else if (tablero[i - 1] == 'x' || tablero[i + 1] == 'x' || tablero[1] == 'x' || tablero[tablero.length - 2] == 'x') {
+                        tablero[i] = '1';
+                        // Sino será 0
+                    } else {
+                        tablero[i] = '0';
+                    }
                 }
-            }
+
+
+            } // Termina condición para saber si es distinto de x
+
         } // Fin de bucle
         // Devuelve tablero
         return tablero;
+    }
+
+    char[] destapaPosicion(int posicion) {
+        // Intercambio posición
+        tableroPrincipal[posicion] = TABLERO_RESPUESTA[posicion];
+        return tableroPrincipal;
+    }
+
+    boolean compruebaMina(int posicion) {
+        // Esta variable comprobará si el usuario ha perdido
+        boolean gameOver = false;
+        // Comprueba si la posición es una mina
+        if (TABLERO_RESPUESTA[posicion] == 'x') {
+            // En ese caso ha perdido
+            gameOver = true;
+        }
+        return gameOver;
     }
 
 }

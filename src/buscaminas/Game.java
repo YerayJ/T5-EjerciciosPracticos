@@ -18,13 +18,18 @@ public class Game {
         // Variable que contiene el número de intentos del usuario
         int intentos = 0;
 
-        // Comprueba si el queremos visualizar la respuesta
-        if (game.CHEAT) {
-            // Muestra el tablero con las respuestas
-            game.muestraTablero(game.TABLERO_RESPUESTA);
-        }
+        // Variable booleana que comprueba si sigue jugando la partida
+        boolean gameOver = false;
 
-        while (intentos < (game.TAMTABLERO - game.NUMERO_MINAS)) {
+        do {
+            // Comprueba si el queremos visualizar la respuesta
+            if (game.CHEAT) {
+                // Muestra el tablero con las respuestas
+                game.muestraTablero(game.TABLERO_RESPUESTA);
+            }
+            // Muestra tablero al usuario
+            game.muestraTablero(game.tableroPrincipal);
+
             // Variable que contiene el número de intentos del usuario
             do {
                 System.out.println("Deme una posición del tablero: ");
@@ -32,12 +37,24 @@ public class Game {
                 posicionUsuario = key.nextInt();
                 // Si la posición dada por el usuario está fuera del tablero la vuelve a pedir
             } while (posicionUsuario < 0 || posicionUsuario > game.TAMTABLERO);
+
             // Después de dar la condición suma 1 al número de intentos
             intentos++;
 
-            game.muestraTablero(game.tableroPrincipal);
+            // Función que devuelve la tabla con la posición destapada que ha elegido el usuario
+            game.destapaPosicion(posicionUsuario);
 
+            // Función que comprueba si la posición ha caído en una mina
+            gameOver = game.compruebaMina(posicionUsuario);
+
+        } while (intentos < (game.TAMTABLERO - game.NUMERO_MINAS) && !gameOver);
+
+        if (gameOver) {
+            System.out.println("\n¡HAS PERDIDO!");
+            game.muestraTablero(game.tableroPrincipal);
         }
 
+
+        // Booleano donde diga que si ha perdido lo muestre o al contrario
     }
 }
