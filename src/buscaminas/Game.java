@@ -47,11 +47,15 @@ public class Game {
             // Función que comprueba si la posición ha caído en una mina
             gameOver = game.compruebaMina(posicionUsuario);
 
-        } while (intentos < (game.TAMTABLERO - game.NUMERO_MINAS) && !gameOver);
+        } // Comprueba que el número de intentos esta por debajo de los posibles y que el jugador no ha pisado una mina
+        while (intentos < (game.TAMTABLERO - game.NUMERO_MINAS) && !gameOver);
 
+        // Comprueba si ha perdido
         if (gameOver) {
             System.out.println("\n¡HAS PERDIDO!");
             game.muestraTablero(game.tableroPrincipal);
+        } else {
+            System.out.println("\n¡HAS GANADO!");
         }
 
 
