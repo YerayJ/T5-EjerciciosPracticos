@@ -13,7 +13,7 @@ public class Funciones {
     final char TABLERO_RESPUESTA[] = generaRespuesta();
 
     // Variable para controlar si se quiere ver la respuesta
-    final boolean CHEAT = true;
+    final boolean CHEAT = false;
 
     // Array con el tablero sin la respuesta
     char tableroPrincipal[] = tableroSinRespuesta();
