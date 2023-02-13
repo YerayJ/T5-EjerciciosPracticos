@@ -13,7 +13,7 @@ public class Funciones {
     final char TABLERO_RESPUESTA[] = generaRespuesta();
 
     // Variable para controlar si se quiere ver la respuesta
-    final boolean CHEAT = true;
+    boolean CHEAT;
 
     // Array con el tablero sin la respuesta
     char tableroPrincipal[] = tableroSinRespuesta();
@@ -67,10 +67,13 @@ public class Funciones {
 
             // Comprueba que en la posición no haya una mina
             if (tablero[i] != 'x') {
-
+                // Entra en los casos específicos de la primera y última posición
                 if (i == 0 || i == tablero.length - 1) {
-                    if ((i == 0 && tablero[i + 1] == 'x') || (i == tablero.length-1 && tablero[i - 1] == 'x')) {
+                    // Comprueba si la primera posición tiene una x a su derecha y si la última posición tiene una x a su izquierda
+                    if ((i == 0 && tablero[i + 1] == 'x') || (i == tablero.length - 1 && tablero[i - 1] == 'x')) {
+                        // En ese caso se asigna uno
                         tablero[i] = '1';
+                    // Si no se asigna 0
                     } else {
                         tablero[i] = '0';
                     }
@@ -79,7 +82,7 @@ public class Funciones {
                     if (tablero[i - 1] == 'x' && tablero[i + 1] == 'x') {
                         tablero[i] = '2';
                         // Si tiene una mina por delante o por detrás la pista será 1
-                    } else if (tablero[i - 1] == 'x' || tablero[i + 1] == 'x' || tablero[1] == 'x' || tablero[tablero.length - 2] == 'x') {
+                    } else if (tablero[i - 1] == 'x' || tablero[i + 1] == 'x') {
                         tablero[i] = '1';
                         // Si no será 0
                     } else {
@@ -96,7 +99,7 @@ public class Funciones {
     }
 
     char[] destapaPosicion(int posicion) {
-        // Intercambio posición
+        // Intercambio posición modificando el tablero principal
         tableroPrincipal[posicion] = TABLERO_RESPUESTA[posicion];
         return tableroPrincipal;
     }
@@ -110,6 +113,11 @@ public class Funciones {
             gameOver = true;
         }
         return gameOver;
+    }
+// Solo funciona en una terminal de bash
+    public void limpiarConsola() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }

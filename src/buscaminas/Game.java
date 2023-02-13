@@ -19,7 +19,39 @@ public class Game {
         int intentos = 0;
 
         // Variable booleana que comprueba si sigue jugando la partida
-        boolean gameOver = false;
+        boolean gameOver;
+
+        // Variable para elegir la opción en la que podemos tener trucos
+        String opcCheat;
+        // Variable para comprobar si la respuesta está mal
+        boolean respuestaCheat;
+
+        do {
+            // Se inicializa en cada vuelta a false
+            respuestaCheat = false;
+
+            // Pide al usuario una cadena String
+            System.out.println("Quieres tener trucos en la siguiente partida");
+            opcCheat = key.nextLine();
+            // Comprueba la opción metida por el usuario
+            switch (opcCheat) {
+                // Si la opción es si la visualización de trucos se activará en la partida
+                case "Si", "si", "SI" -> {
+                    game.CHEAT = true;
+                }
+                // Si la opción es no la visualización de trucos no se activará en la partida
+                case "no", "No", "NO" -> {
+                    game.CHEAT = false;
+                }
+                // En caso de que ponga cualquier otra opción no permitida
+                case default -> {
+                    // Le da valor true a la variable auxiliar
+                    respuestaCheat = true;
+                }
+            } // Fin del Switch
+        // Se ejecuta mientras la variable respuestaCheat sea igual a true
+        } while (respuestaCheat);
+
 
         do {
             // Comprueba si el queremos visualizar la respuesta
@@ -32,7 +64,6 @@ public class Game {
 
             // Variable que contiene el número de intentos del usuario
             do {
-
                 System.out.println("Deme una posición del tablero: ");
                 // Pide posición al usuario
                 posicionUsuario = key.nextInt();
@@ -49,18 +80,19 @@ public class Game {
             // Función que comprueba si la posición ha caído en una mina
             gameOver = game.compruebaMina(posicionUsuario);
 
-        } // Comprueba que el número de intentos esta por debajo de los posibles y que el jugador no ha pisado una mina
+        } // Comprueba que el número de intentos está por debajo de los posibles y que el jugador no ha pisado una mina
         while (intentos < (game.TAMTABLERO - game.NUMERO_MINAS) && !gameOver);
 
         // Comprueba si ha perdido
         if (gameOver) {
             System.out.println("\n¡HAS PERDIDO!");
+            // Muestra tablero al usuario
             game.muestraTablero(game.tableroPrincipal);
         } else {
             System.out.println("\n¡HAS GANADO!");
+            // Muestra tablero al usuario
+            game.muestraTablero(game.tableroPrincipal);
         }
 
-
-        // Booleano donde diga que si ha perdido lo muestre o al contrario
     }
 }
