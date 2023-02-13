@@ -32,11 +32,13 @@ public class Game {
 
             // Variable que contiene el número de intentos del usuario
             do {
+
                 System.out.println("Deme una posición del tablero: ");
                 // Pide posición al usuario
                 posicionUsuario = key.nextInt();
+
                 // Si la posición dada por el usuario está fuera del tablero la vuelve a pedir
-            } while (posicionUsuario < 0 || posicionUsuario > game.TAMTABLERO);
+            } while (posicionUsuario < 0 || posicionUsuario > game.TAMTABLERO || game.tableroPrincipal[posicionUsuario] != '?');
 
             // Después de dar la condición suma 1 al número de intentos
             intentos++;

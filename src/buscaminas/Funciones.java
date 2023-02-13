@@ -52,7 +52,6 @@ public class Funciones {
             }
         } // Fin de bucle
 
-        tablero[1] = 'x';
         return tablero;
     }
 
@@ -82,7 +81,7 @@ public class Funciones {
                         // Si tiene una mina por delante o por detrás la pista será 1
                     } else if (tablero[i - 1] == 'x' || tablero[i + 1] == 'x' || tablero[1] == 'x' || tablero[tablero.length - 2] == 'x') {
                         tablero[i] = '1';
-                        // Sino será 0
+                        // Si no será 0
                     } else {
                         tablero[i] = '0';
                     }
