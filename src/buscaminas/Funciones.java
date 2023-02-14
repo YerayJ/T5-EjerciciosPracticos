@@ -114,6 +114,27 @@ public class Funciones {
         }
         return gameOver;
     }
+
+    boolean RespuestaCheat(Funciones game, String opcCheat, boolean respuestaCheat) {
+        // Comprueba la opción metida por el usuario
+        switch (opcCheat) {
+            // Si la opción es si la visualización de trucos se activará en la partida
+            case "Si", "si", "SI" -> {
+                game.CHEAT = true;
+            }
+            // Si la opción es no la visualización de trucos no se activará en la partida
+            case "no", "No", "NO" -> {
+                game.CHEAT = false;
+            }
+            // En caso de que ponga cualquier otra opción no permitida
+            case default -> {
+                // Le da valor true a la variable auxiliar
+                respuestaCheat = true;
+            }
+        } // Fin del Switch
+        return respuestaCheat;
+    }
+
 // Solo funciona en una terminal de bash
     public void limpiarConsola() {
         System.out.print("\033[H\033[2J");

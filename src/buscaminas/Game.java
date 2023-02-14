@@ -33,23 +33,11 @@ public class Game {
             // Pide al usuario una cadena String
             System.out.println("Quieres tener trucos en la siguiente partida");
             opcCheat = key.nextLine();
-            // Comprueba la opción metida por el usuario
-            switch (opcCheat) {
-                // Si la opción es si la visualización de trucos se activará en la partida
-                case "Si", "si", "SI" -> {
-                    game.CHEAT = true;
-                }
-                // Si la opción es no la visualización de trucos no se activará en la partida
-                case "no", "No", "NO" -> {
-                    game.CHEAT = false;
-                }
-                // En caso de que ponga cualquier otra opción no permitida
-                case default -> {
-                    // Le da valor true a la variable auxiliar
-                    respuestaCheat = true;
-                }
-            } // Fin del Switch
-        // Se ejecuta mientras la variable respuestaCheat sea igual a true
+
+            // Comprueba la respuesta del usuario
+            respuestaCheat = game.RespuestaCheat(game, opcCheat, respuestaCheat);
+
+            // Se ejecuta mientras la variable respuestaCheat sea igual a true
         } while (respuestaCheat);
 
 
@@ -87,12 +75,14 @@ public class Game {
         if (gameOver) {
             System.out.println("\n¡HAS PERDIDO!");
             // Muestra tablero al usuario
-            game.muestraTablero(game.tableroPrincipal);
+            game.muestraTablero(game.TABLERO_RESPUESTA);
         } else {
             System.out.println("\n¡HAS GANADO!");
             // Muestra tablero al usuario
-            game.muestraTablero(game.tableroPrincipal);
+            game.muestraTablero(game.TABLERO_RESPUESTA);
         }
 
     }
+
+
 }
