@@ -7,7 +7,7 @@ public class Funciones {
     Scanner key = new Scanner(System.in);
 
     // Array de dos dimensiones que guarda la baraja
-    static final double baraja[][] =
+     final double baraja[][] =
             {{1, 2, 3, 4, 5, 6, 7, 0.5, 0.5, 0.5},
                     {1, 2, 3, 4, 5, 6, 7, 0.5, 0.5, 0.5},
                     {1, 2, 3, 4, 5, 6, 7, 0.5, 0.5, 0.5},
@@ -19,17 +19,6 @@ public class Funciones {
     // El número que introduce el usuario
     String tirada;
 
-    // Función que saca una carta con número aleatorio
-    double sacaCarta() {
-        // Genera un número aleatorio del 1 al 9
-        int posicion = (int) (Math.random() * baraja[0].length);
-
-        // La variable carta coge el valor de la posición en la tabla
-        double carta = baraja[0][posicion];
-
-        // Devuelve la variable
-        return carta;
-    }
 
     String sacaTipo() {
         // Saca un número aleatorio del 0 al 3 que es el número de filas
@@ -61,6 +50,9 @@ public class Funciones {
         // Variable que guarda el valor de la carta actual
         double carta;
 
+        // Variable que guarda la posición de la tabla
+        int posicion;
+
         // Suma de las cartas actual
         double sumaCartas = 0;
 
@@ -72,13 +64,31 @@ public class Funciones {
         tirada = key.next();
 
         while (tirada.equals("s") && sigueJugando) {
-            // Saca carta y le asigna valor a la variable auxiliar
-            carta = sacaCarta();
+            // Saca la posición de la carta en el array
+            posicion = (int) (Math.random() * baraja[0].length);
+
+            // La variable carta coge el valor de la posición en la tabla
+            carta = baraja[0][posicion];
+
             // La añade a la suma de cartas
             sumaCartas += carta;
 
             // Genera una tirada
-            System.out.println("Tu carta es: " + carta + " " + sacaTipo());
+            switch (posicion){
+                case 8 -> {
+                    System.out.println("Tu carta es: " + "sota de " + sacaTipo());
+                }
+                case 9 -> {
+                    System.out.println("Tu carta es: " + "caballo de " + sacaTipo());
+                }
+                case 10 -> {
+                    System.out.println("Tu carta es: " + "rey de " + sacaTipo());
+                }
+                case default -> {
+                    System.out.println("Tu carta es: " + carta + " " + sacaTipo());
+                }
+            }
+
 
             // Muestra puntuación actual
             System.out.println("Puntuación actual: " + sumaCartas);
