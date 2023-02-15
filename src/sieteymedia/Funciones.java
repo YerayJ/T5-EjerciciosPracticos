@@ -85,7 +85,7 @@ public class Funciones {
                     System.out.println("Tu carta es: " + "rey de º  " + sacaTipo());
                 }
                 case default -> {
-                    System.out.println("Tu carta es: " + carta + " " + sacaTipo());
+                    System.out.println("Tu carta es: " + (int)carta + " " + sacaTipo());
                 }
             }
 
