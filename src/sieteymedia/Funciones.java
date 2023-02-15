@@ -75,14 +75,14 @@ public class Funciones {
 
             // Genera una tirada
             switch (posicion){
-                case 8 -> {
+                case 7 -> {
                     System.out.println("Tu carta es: " + "sota de " + sacaTipo());
                 }
-                case 9 -> {
+                case 8 -> {
                     System.out.println("Tu carta es: " + "caballo de " + sacaTipo());
                 }
-                case 10 -> {
-                    System.out.println("Tu carta es: " + "rey de " + sacaTipo());
+                case 9 -> {
+                    System.out.println("Tu carta es: " + "rey de º  " + sacaTipo());
                 }
                 case default -> {
                     System.out.println("Tu carta es: " + carta + " " + sacaTipo());
